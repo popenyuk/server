@@ -1,4 +1,0 @@
-/mnt/d/Projects/Third_year/First_semester/OS/synchronous_multithreaded_server/cmake-build-release/CMakeFiles/edit_cache.dir
-/mnt/d/Projects/Third_year/First_semester/OS/synchronous_multithreaded_server/cmake-build-release/CMakeFiles/rebuild_cache.dir
-/mnt/d/Projects/Third_year/First_semester/OS/synchronous_multithreaded_server/cmake-build-release/CMakeFiles/server.dir
-/mnt/d/Projects/Third_year/First_semester/OS/synchronous_multithreaded_server/cmake-build-release/CMakeFiles/client.dir
