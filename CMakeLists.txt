@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.10)
+project(first_task C)
+
+set(CMAKE_C_STANDARD 99)
+
+include_directories(inc src)
+IF (UNIX)
+    FIND_PACKAGE(Threads)
+    add_executable(server src/server.c src/my_server.c inc/my_server.h inc/includes.h)
+    add_executable(client src/client.c inc/includes.h src/my_client.c inc/my_client.h)
+    TARGET_LINK_LIBRARIES(server Threads::Threads)
+ENDIF (UNIX)
+IF (WIN32)
+    add_executable(server src/server.c src/my_server.c inc/my_server.h inc/includes.h)
+    add_executable(client src/client.c inc/includes.h src/my_client.c inc/my_client.h)
+    TARGET_LINK_LIBRARIES(server ws2_32 wsock32)
+    TARGET_LINK_LIBRARIES(client ws2_32 wsock32)
+ENDIF (WIN32)
