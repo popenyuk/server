@@ -27,7 +27,7 @@ int main(int argc, char const *argv[]) {
         exit(EXIT_FAILURE);
     }
     if (argv[3][0] == 'm' && argc == 4) {
-        printf("\n\tInvalide message!\n");
+        printf("\n\tInvalid message!\n");
         exit(EXIT_FAILURE);
     }
 

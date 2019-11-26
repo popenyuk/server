@@ -64,6 +64,15 @@ void wait_for_response_from_server(my_client *my_new_client);
  * Send message from client to server
  * @param my_void_server - special void * parameter for multithreading - represents my own structure
  * @param message - message which we will transmit to server
+ * @param msgSize - size of message
+ * @return None
+ */
+void send_message(int socket, const char *message, size_t msgSize);
+
+/*
+ * Send message from client to server
+ * @param my_void_server - special void * parameter for multithreading - represents my own structure
+ * @param message - message which we will transmit to server
  * @return None
  */
 void send_message_from_client(int socket, const char *message);

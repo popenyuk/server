@@ -40,11 +40,15 @@ void init_defaults_parameters_of_client(my_client *my_new_client) {
     my_new_client->addrlen = sizeof(my_new_client->addr);
 }
 
-void send_message_from_client(int socket, const char *message) {
-    if (!send(socket, message, strlen(message), 0)) {
+void send_message(int socket, const char *message, size_t msgSize) {
+    if (!send(socket, message, msgSize, 0)) {
         printf("\n Send data FAILURE \n");
         exit(EXIT_FAILURE);
     }
+}
+
+void send_message_from_client(int socket, const char *message) {
+    send_message(socket, message, strlen(message));
 }
 
 void recv_message_from_server(int socket, char *message) {
@@ -68,35 +72,51 @@ void recv_message_from_server(int socket, char *message) {
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
 
 void client_run(my_client *my_new_client, int argc, const char **argv) {
-    char *len_of_message = (char *) (malloc(2 * sizeof(char)));
+//    char *len_of_message = (char *) (malloc(2 * sizeof(char)));
+    char len_of_message[2];
+
     char *str = (char *) (malloc(2048 * sizeof(char)));
     // connect to server
     client_connect_to_server(my_new_client);
 
     send_message_from_client(my_new_client->sock, argv[3]);
     if (argc == 5) {
-        sprintf(len_of_message, "%lu", strlen(argv[4]));
-        send_message_from_client(my_new_client->sock, len_of_message);
+        uint16_t msgLen = strlen(argv[4]);
+        len_of_message[0] = msgLen & 0xff;
+        len_of_message[1] = msgLen >> 8;
+//        sprintf(len_of_message, "%lu", strlen(argv[4]));
+        send_message(my_new_client->sock, len_of_message, 2);
         send_message_from_client(my_new_client->sock, argv[4]);
     }
     recv_message_from_server(my_new_client->sock, str);
     printf("%s\n", str);
     while (1) {
+        printf(">> ");
         scanf("%99[^\n]%*c", str);
         if (strlen(str) == 1 && str[0] == 'm') {
             send_message_from_client(my_new_client->sock, str);
+            printf("[msg] >> ");
             scanf("%99[^\n]%*c", str);
-            sprintf(len_of_message, "%lu", strlen(str));
-            send_message_from_client(my_new_client->sock, len_of_message);
+            uint16_t msgLen = strlen(str);
+            len_of_message[0] = msgLen & 0xff;
+            len_of_message[1] = msgLen >> 8;
+            send_message(my_new_client->sock, len_of_message,2 );
+            send_message_from_client(my_new_client->sock, str);
+        } else if (strlen(str) == 1) {
+            send_message_from_client(my_new_client->sock, str);
+        } else {
+            printf("More than one letter printed, as command\n");
+            continue;
         }
-        send_message_from_client(my_new_client->sock, str);
+
         if (strlen(str) == 1 && str[0] == 'q') {
+            send_message_from_client(my_new_client->sock, "q");
             break;
         }
         recv_message_from_server(my_new_client->sock, str);
         printf("%s\n", str);
     }
-    free(len_of_message);
+//    free(len_of_message);
     free(str);
 }
 

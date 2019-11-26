@@ -57,7 +57,7 @@ void *server_run(void *my_void_server) {
                     break;
                 case 'm':
                     read_message_from_client(my_new_server->new_socket, len_of_message, 2);
-                    size_of_message = atoi(len_of_message);
+                    size_of_message = len_of_message[0] | len_of_message[1] << 8;
                     message = (char *) (malloc(size_of_message * sizeof(char)));
                     read_message_from_client(my_new_server->new_socket, message, size_of_message);
                     size_t size = strlen(message);
