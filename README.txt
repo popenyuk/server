@@ -5,7 +5,7 @@ Tested on:
 
 Team:
 	Zenovii Popenyuk
-	Yevhenii Molodtsov
+	- Yevhenii Molodtsov (Not this time)
 	Markiian Matsiuk
 
 Description:
