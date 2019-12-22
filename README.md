@@ -1,15 +1,19 @@
 # Multi-threaded server on C.
 ## Tested on
-```Linux(Ubuntu and WSL)
-MinGW under Msys2```
+```
+Linux(Ubuntu and WSL)
+MinGW under Msys2
+```
 
 ## Team
-```Zenovii Popenyuk
+```
+Zenovii Popenyuk
 Markiian Matsiuk
 ```
 
 ## Description
-```The server that accepts the connection reads one letter from the client and, depending on it, sends in response:
+```
+The server that accepts the connection reads one letter from the client and, depending on it, sends in response:
 	'd' -- the current date,
 	't` -- the present time,
 	'h' -- Hello or another fixed greeting.
@@ -21,12 +25,14 @@ Written a multiuser version using pthread and WIN SOCKS.
 ## Example of run:
 ### In general:
 #### Server
-    ```server <number> <number of threads>
+    ```
+    server <number> <number of threads>
 	 -   Where number is PORT number
 	 -  number of threads
 	```
 #### Client:
-    ```client <address> <number> <type_of_message> <message>
+    ```
+    client <address> <number> <type_of_message> <message>
 	-   Where address is address of server.
 	-   Where number is PORT number.
 	-   Where message is your message that you send to server.
