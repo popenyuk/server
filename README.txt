@@ -8,9 +8,13 @@ Team:
 	Markiian Matsiuk
 
 Description:
-	Написаний для Linux та Windows. Також зроблене перше додаткове завдання.
-	Додано q.
-	Для того щоб скористатися функцією m під час введення ітеративно команд, необхідно спочатку ввести m, натиснути Enter, а потім ввести повідомлення.
+	The server that accepts the connection reads one letter from the client and, depending on it, sends in response:
+		'd' -- the current date,
+		't` -- the present time,
+		'h' -- Hello or another fixed greeting.
+		'm' - reads a formatted message from the client.
+	Written a multiuser version using pthread and WIN SOCKS.
+	
 
 Example of run:
     In general:
@@ -24,7 +28,7 @@ Example of run:
                 -   Where number is PORT number.
                 -   Where message is your message that you send to server.
 
-    Wxample of compilation:
+    Example of compilation:
         mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release && make
     Run server(one thread version):
         ./server 7500 1
